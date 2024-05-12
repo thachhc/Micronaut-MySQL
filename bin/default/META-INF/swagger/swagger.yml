@@ -1,0 +1,113 @@
+openapi: 3.0.1
+paths:
+  /message:
+    get:
+      operationId: getMessages
+      responses:
+        "200":
+          description: getMessages 200 response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Message"
+  /message/json:
+    get:
+      operationId: messageJson
+      responses:
+        "200":
+          description: messageJson 200 response
+          content:
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+  /message/post:
+    post:
+      operationId: createMessage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Message"
+        required: true
+      responses:
+        "200":
+          description: createMessage 200 response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+  /message/xml:
+    get:
+      operationId: messageXml
+      responses:
+        "200":
+          description: messageXml 200 response
+          content:
+            text/xml:
+              schema:
+                type: object
+  /message/{id}:
+    get:
+      operationId: getMessage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: getMessage 200 response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    put:
+      operationId: updateMessage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Message"
+        required: true
+      responses:
+        "200":
+          description: updateMessage 200 response
+    delete:
+      operationId: deleteMessage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: deleteMessage 200 response
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        creationDate:
+          type: string
+        from:
+          type: string
+        id:
+          type: integer
+          format: int32
+        message:
+          type: string
+        to:
+          type: string
